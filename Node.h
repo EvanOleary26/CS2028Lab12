@@ -13,12 +13,4 @@ class Node {
         Node(T inVal) : data(inVal), next(nullptr), prev(nullptr) {};
 };
 
-
-
-
-
-
-
-
-
 #endif

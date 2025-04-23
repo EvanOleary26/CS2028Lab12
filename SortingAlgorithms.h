@@ -8,9 +8,7 @@
 //Bubble Sort
 template <class T>
 void bubbleSort(T *arr, int arrSize) {
-    for (int k{}; k < arrSize; k++) {
-        std::cout << arr[k] << " ";
-    }
+
     std::cout << "\n";
 	for (int i{}; i < arrSize -1;i++){
 		for (int j{}; j < arrSize -i-1;j++){

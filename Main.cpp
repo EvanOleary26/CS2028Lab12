@@ -28,39 +28,66 @@ Student createRandomStudent();
 
 typedef std::chrono::high_resolution_clock Clock;
 
+template<class T>
+T* generateArray(int n) {
+    T* arr = new T[n];
+
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % (2 * n + 1);
+    } //random number
+    return arr;
+
+}
+
+void runTests(Student *testArr, int size) {
+	auto bubble1 = Clock::now();
+	bubbleSort(testArr, size);
+	auto bubble2 = Clock::now();
+	std::cout << "Bubble Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(bubble2 - bubble1).count() << " nanoseconds" << std::endl;
+	auto insert1 = Clock::now();
+	insertionSort(testArr, size);
+	auto insert2 = Clock::now();
+	std::cout << "Insertion Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(insert2 - insert1).count() << " nanoseconds" << std::endl;
+	auto merge1 = Clock::now();
+	mergeSort(testArr, 0, size - 1);
+	auto merge2 = Clock::now();
+	std::cout << "Merge Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(merge2 - merge1).count() << " nanoseconds" << std::endl;
+	auto quick1 = Clock::now();
+	quickSort(testArr, 0, size - 1);
+	auto quick2 = Clock::now();
+	std::cout << "Quick Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(quick2 - quick1).count() << " nanoseconds" << std::endl;
+	/*
+	auto counting1 = Clock::now();
+	countingSort(testArr, size);
+	auto counting2 = Clock::now();
+	std::cout << "Counting Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(counting2 - counting1).count() << " nanoseconds" << std::endl;
+	auto radix1 = Clock::now();
+	radixSort(testArr, size);
+	auto radix2 = Clock::now();
+	std::cout << "Radix Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(radix2 - radix1).count() << " nanoseconds" << std::endl;
+	*/
+}
+
 int main() {
+    srand(time(0));
 
-    auto t1 = Clock::now();
-    auto t2 = Clock::now();
-    std::cout << "Delta t2-t1: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() << " nanoseconds" << std::endl;
+    int sizes[6] = {10, 100, 500, 5000, 25000, 100000};
+    const int numSizes = sizeof(sizes) / sizeof(sizes[0]);
 
-    //test
-    Student testArr[] = { Student(2),Student(5),Student(7),Student(1),Student(3)};
-    int arrSize = sizeof(testArr)/sizeof(testArr[0]);
+    Student* arrays[numSizes];
 
-    Student bubbleTest[5] = { Student(2),Student(5),Student(7),Student(1),Student(3) };
-    auto bs1 = Clock::now();
-    bubbleSort(bubbleTest, arrSize);
-    auto bs2 = Clock::now();
-    std::cout << "Bubble Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(bs2 - bs1).count() << " nanoseconds" << std::endl;
+    for (int i = 0; i < numSizes; ++i) {
+        int size = sizes[i];
+        arrays[i] = generateArray<Student>(size);
+        std::cout << arrays[i][9] << " ";
+    }
+    std::cout << "\n";
 
-    Student InsertTest[5] = {Student(2),Student(5),Student(7),Student(1),Student(3)};
-    auto is1 = Clock::now();
-    insertionSort(InsertTest, arrSize);
-    auto is2 = Clock::now();
-    std::cout << "Insertion Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(is2 - is1).count() << " nanoseconds" << std::endl;
-
-    Student MergeTest[5] = {Student(2),Student(5),Student(7),Student(1),Student(3)};
-    auto ms1 = Clock::now();
-	mergeSort(MergeTest, 0, arrSize - 1);
-    auto ms2 = Clock::now();
-    std::cout << "Merge sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(ms2 - ms1).count() << " nanoseconds" << std::endl;
-
-    Student QuickTest[5] = { Student(2),Student(5),Student(7),Student(1),Student(3) };
-    auto qs1 = Clock::now();
-    quickSort(QuickTest, 0, arrSize - 1);
-    auto qs2 = Clock::now();
-    std::cout << "Merge sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(qs2 - qs1).count() << " nanoseconds" << std::endl;
+	for (int i{}; i < numSizes; ++i) {
+		int size = sizes[i];
+		std::cout << "\nFor an array of size " << size << ":\n";
+		runTests(arrays[i], size);
+	}
 
     return 0;
 }
