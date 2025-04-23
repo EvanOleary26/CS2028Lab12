@@ -125,23 +125,44 @@ void quickSort(T *arr, int low, int high) {
 
 //Counting Sort
 template <class T>
-T* countingSort(T arr[]) { //may need to be changed to a pointer depending on data size
-    T c[] = new T[sizeof(arr)];
-    for (int i = 0; i < arr.length(); i++) { //gives us our count for each value 
-        c[arr[i]]++;
+T* countingSort(T inputArray[], int arrSize) {
+    int N = arrSize;
+
+    // Finding the maximum element of array inputArray[].
+    int M = 0;
+
+    for (int i = 0; i < N; i++) {
+		if (inputArray[i] > M) {
+			M = inputArray[i];
+        }
+	}
+    
+    // Initializing countArray[] with 0
+    T* countArray = new T[M+1];
+
+    // Mapping each element of inputArray[] as an index
+    // of countArray[] array
+    for (int i = 0; i < N; i++) {
+        countArray[inputArray[i]]++;
+	}
+
+    // Calculating prefix sum at every index
+    // of array countArray[]
+    for (int i = 1; i <= M; i++) {
+        countArray[i] += countArray[i - 1];
+	}
+
+    // Creating outputArray[] from countArray[] array
+    T* outputArray = new T[N];
+
+    for (int i = N - 1; i >= 0; i--) {
+        outputArray[countArray[inputArray[i]] - 1] = inputArray[i];
+
+        countArray[inputArray[i]]--;
     }
-    for(int i=1; i<c.length; i++){ //calculating our running sum
-        c[i] += c[i-1];
-    }
-    T* result = new T[sizeof(arr)];
-    for(int i=0; i<arr.length(); i++){
-        int index = c[arr[i]];
-        index--;
-        c[arr[i]] = index;
-        result[index] = arr[i]; //places the value in the result array
-    }
-    return result;
+    return outputArray;
 }
+
     
 //Radix Sort
 template <class T>
@@ -165,9 +186,10 @@ void radixSort(T arr[], int arrSize) {
                 break;
             }
         }//close find-dec
-    //actual piece of radixSort
+
+        //actual piece of radixSort
         for (int i{}; i < decPlaces; i++) {
-            countingSort(arr);
+            countingSort(arr, arrSize);
         }
     }
 
