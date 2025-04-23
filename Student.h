@@ -12,6 +12,7 @@ class Student {
 
 	public:
 		Student() : firstName(" "), lastName(" "), mNumber(-1), major(" ") {};
+		Student(int mN) : firstName(" "), lastName(" "), mNumber(mN), major(" ") {};
         Student(std::string fN,std::string lN, int mN, std::string mjr) : firstName(fN), lastName(lN), mNumber(mN), major(mjr) {};
 
         int operator%(const int &right) { return this->mNumber % right; }
