@@ -15,12 +15,17 @@ class Student {
 		Student(int mN) : firstName(" "), lastName(" "), mNumber(mN), major(" ") {};
         Student(std::string fN,std::string lN, int mN, std::string mjr) : firstName(fN), lastName(lN), mNumber(mN), major(mjr) {};
 
+		operator int() const { return mNumber; }
+		
         int operator%(const int &right) { return this->mNumber % right; }
+		int operator/(const int &right) { return this->mNumber / right; }
 
         bool operator>(const Student &right) { return this->mNumber > right.mNumber; }
         bool operator<(const Student &right) { return this->mNumber < right.mNumber; }
-        bool operator==(const Student &right) { return mNumber == right.mNumber; }
-		bool operator!=(const Student& right) { return mNumber != right.mNumber; }
+        bool operator==(const Student &right) { return this->mNumber == right.mNumber; }
+		bool operator!=(const Student& right) { return this->mNumber != right.mNumber; }
+
+
 
 		friend std::ostream& operator<<(std::ostream& os, const Student& right) {
 			os << "m" << right.mNumber;

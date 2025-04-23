@@ -123,25 +123,24 @@ void quickSort(T *arr, int low, int high) {
 
 //Counting Sort
 template <class T>
-T* countingSort(T inputArray[], int arrSize) {
+T* countingSort(T* arr, int arrSize) {
     int N = arrSize;
 
-    // Finding the maximum element of array inputArray[].
+    // Finding the maximum element of array arr[].
     int M = 0;
-
     for (int i = 0; i < N; i++) {
-		if (inputArray[i] > M) {
-			M = inputArray[i];
+		if (int(arr[i]) > M) {
+			M = int(arr[i]);
         }
 	}
     
     // Initializing countArray[] with 0
-    T* countArray = new T[M+1];
+    int* countArray = new int[M+1]();
 
-    // Mapping each element of inputArray[] as an index
+    // Mapping each element of arr[] as an index
     // of countArray[] array
     for (int i = 0; i < N; i++) {
-        countArray[inputArray[i]]++;
+        countArray[arr[i]]++;
 	}
 
     // Calculating prefix sum at every index
@@ -154,9 +153,8 @@ T* countingSort(T inputArray[], int arrSize) {
     T* outputArray = new T[N];
 
     for (int i = N - 1; i >= 0; i--) {
-        outputArray[countArray[inputArray[i]] - 1] = inputArray[i];
-
-        countArray[inputArray[i]]--;
+        outputArray[countArray[arr[i]] - 1] = arr[i];
+        countArray[arr[i]]--;
     }
     return outputArray;
 }
@@ -165,31 +163,57 @@ T* countingSort(T inputArray[], int arrSize) {
 //Radix Sort
 template <class T>
 void radixSort(T arr[], int arrSize) {
-    //find amount of decimal places
-    T greatest = T[0]; //rather than make a new T object we’re just gonna have temp be the first T
-    for (int i{}; i < arrSize; i++) {
-        if (greatest > T[i]) {
-            greatest = T[i];
-        }
-    } // close find-greatest
-    //find amount of decimal places
-        int decPlaces = 0;
-        T decFinder = greatest;
-        while (true) {
-            if (decFinder / 10 < 10) {
-                decFinder++;
-                decFinder / 10;
-            }
-            else {
-                break;
-            }
-        }//close find-dec
-
-        //actual piece of radixSort
-        for (int i{}; i < decPlaces; i++) {
-            countingSort(arr, arrSize);
+    // Find maximum element
+    int max = int(arr[0]);
+    for (int i = 1; i < arrSize; i++) {
+        if (int(arr[i]) > max) {
+            max = int(arr[i]);
         }
     }
+    
+    // Count number of digits in max
+    int digits = 0;
+    int temp = max;
+    while (temp > 0) {
+        digits++;
+        temp /= 10;
+    }
+    
+    // Do counting sort for every digit position
+    int exp = 1; // 1, 10, 100, etc.
+    T* output = new T[arrSize];
+    
+    for (int d = 0; d < digits; d++) {
+        // Initialize count array
+        int count[10] = {0};
+        
+        // Count occurrences of each digit
+        for (int i = 0; i < arrSize; i++) {
+            count[(int(arr[i]) / exp) % 10]++;
+        }
+        
+        // Change count[i] so that it contains the actual
+        // position of this digit in output[]
+        for (int i = 1; i < 10; i++) {
+            count[i] += count[i - 1];
+        }
+        
+        // Build the output array
+        for (int i = arrSize - 1; i >= 0; i--) {
+            output[count[(int(arr[i]) / exp) % 10] - 1] = arr[i];
+            count[(int(arr[i]) / exp) % 10]--;
+        }
+        
+        // Copy the output array to arr[]
+        for (int i = 0; i < arrSize; i++) {
+            arr[i] = output[i];
+        }
+        
+        exp *= 10;
+    }
+    
+    delete[] output; // Free memory
+}
 
 
 #endif

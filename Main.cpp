@@ -19,7 +19,7 @@ template <class T>
 void quickSort(T *arr, int low, int high);
 
 template <class T>
-T* countingSort(T arr[], int arrSize);
+T* countingSort(T* arr, int arrSize);
 
 template <class T>
 void radixSort(T arr[], int arrSize);
@@ -43,29 +43,27 @@ void runTests(Student *testArr, int size) {
 	auto bubble1 = Clock::now();
 	bubbleSort(testArr, size);
 	auto bubble2 = Clock::now();
-	std::cout << "Bubble Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(bubble2 - bubble1).count() << " nanoseconds" << std::endl;
+	std::cout << "Bubble Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(bubble2 - bubble1).count() / 1000000 << " ms" << std::endl;
 	auto insert1 = Clock::now();
 	insertionSort(testArr, size);
 	auto insert2 = Clock::now();
-	std::cout << "Insertion Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(insert2 - insert1).count() << " nanoseconds" << std::endl;
+	std::cout << "Insertion Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(insert2 - insert1).count() / 1000000 << " ms" << std::endl;
 	auto merge1 = Clock::now();
 	mergeSort(testArr, 0, size - 1);
 	auto merge2 = Clock::now();
-	std::cout << "Merge Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(merge2 - merge1).count() << " nanoseconds" << std::endl;
+	std::cout << "Merge Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(merge2 - merge1).count() / 1000000 << " ms" << std::endl;
 	auto quick1 = Clock::now();
 	quickSort(testArr, 0, size - 1);
 	auto quick2 = Clock::now();
-	std::cout << "Quick Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(quick2 - quick1).count() << " nanoseconds" << std::endl;
-	/*
+	std::cout << "Quick Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(quick2 - quick1).count() / 1000000 << " ms" << std::endl;
 	auto counting1 = Clock::now();
-	countingSort(testArr, size);
+	Student* tempArr = countingSort(testArr, size);
 	auto counting2 = Clock::now();
-	std::cout << "Counting Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(counting2 - counting1).count() << " nanoseconds" << std::endl;
+	std::cout << "Counting Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(counting2 - counting1).count() / 1000000 << " ms" << std::endl;
 	auto radix1 = Clock::now();
 	radixSort(testArr, size);
 	auto radix2 = Clock::now();
-	std::cout << "Radix Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(radix2 - radix1).count() << " nanoseconds" << std::endl;
-	*/
+	std::cout << "Radix Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(radix2 - radix1).count() / 1000000 << " ms" << std::endl;
 }
 
 int main() {
