@@ -22,7 +22,7 @@ void insertionSort(T *arr){
 	for (int i=1; i<n; ++i){
 		T key = arr[i];
 		int j=i-1;
-		while(j>= 0 && arr[k] > key){
+		while(j>= 0 && arr[j] > key){
 			arr[j+1]=arr[j];
 			j = j-1;
 		}
@@ -66,16 +66,16 @@ void quickSort(T *arr, int low, int high) {
 template <class T>
 T* countingSort(T arr[], int size) { //may need to be changed to a pointer depending on data size
     T c[] = new T[size];
-    for(int i=0; i<arr.length, i++){ //gives us our count for each value 
+    for (int i = 0; i < arr.length(); i++) { //gives us our count for each value 
         c[arr[i]]++;
     }
     for(int i=1; i<c.length; i++){ //calculating our running sum
         c[i] += c[i-1];
     }
     T* result = new T[sizeof(arr)];
-    for(int i=0; i<arr.length; i++){
-        int index = c[a[i]];
-        index --;
+    for(int i=0; i<arr.length(); i++){
+        int index = c[arr[i]];
+        index--;
         c[arr[i]] = index;
         result[index] = arr[i]; //places the value in the result array
     }
@@ -87,26 +87,27 @@ template <class T>
 void radixSort(T arr[]) {
     //find amount of decimal places
     T greatest = T[0]; //rather than make a new T object we’re just gonna have temp be the first T
-    for (int i{};i<arr.size();i++){
-    if (greatest > T[i]){
-        greatest = T[i];
-    }
+    for (int i{}; i < arr.size(); i++) {
+        if (greatest > T[i]) {
+            greatest = T[i];
+        }
     } // close find-greatest
     //find amount of decimal places
-        int decPlaces = 0;
-        T decFinder = greatest;
-        while(true){
-            if (decFinder / 10 < 10){
-                decFinder++;
-                decFinder / 10;
-            }
-            else{
-                break;
-            }
-        } //close find-dec
-    //actual piece of radixSort
-    for (int i{}; i< decPlaces: i++){
+    int decPlaces = 0;
+    T decFinder = greatest;
+    while (true) {
+        if (decFinder / 10 < 10) {
+            decFinder++;
+            decFinder / 10;
+        }
+        else {
+            break;
+        }
+    }//close find-dec
+//actual piece of radixSort
+    for (int i{}; i < decPlaces; i++) {
         countingSort(arr);
     }
 }
+
     
