@@ -50,11 +50,11 @@ int main() {
     auto is2 = Clock::now();
     std::cout << "Insertion Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(is2 - is1).count() << " nanoseconds" << std::endl;
 
-    Student CountTest[5] = {Student(2),Student(5),Student(7),Student(1),Student(3)};
-    auto cs1 = Clock::now();
-    countingSort(CountTest, arrSize);
-    auto cs2 = Clock::now();
-    std::cout << "Counting sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(cs2 - cs1).count() << " nanoseconds" << std::endl;
+    Student MergeTest[5] = {Student(2),Student(5),Student(7),Student(1),Student(3)};
+    auto ms1 = Clock::now();
+	mergeSort(MergeTest, 0, arrSize - 1);
+    auto ms2 = Clock::now();
+    std::cout << "Merge sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(ms2 - ms1).count() << " nanoseconds" << std::endl;
 
 
     return 0;
