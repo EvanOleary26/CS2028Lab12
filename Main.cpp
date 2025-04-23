@@ -19,7 +19,7 @@ template <class T>
 void quickSort(T *arr, int low, int high);
 
 template <class T>
-T* countingSort(T arr[]);
+T* countingSort(T arr[], int arrSize);
 
 template <class T>
 void radixSort(T arr[], int arrSize);
