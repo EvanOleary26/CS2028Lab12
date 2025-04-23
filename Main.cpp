@@ -40,6 +40,7 @@ T* generateArray(int n) {
 }
 
 void runTests(Student *testArr, int size) {
+    int randomNum = rand() % size;
 	auto bubble1 = Clock::now();
 	bubbleSort(testArr, size);
 	auto bubble2 = Clock::now();
@@ -53,7 +54,7 @@ void runTests(Student *testArr, int size) {
 	auto merge2 = Clock::now();
 	std::cout << "Merge Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(merge2 - merge1).count() / 1000000 << " ms" << std::endl;
 	auto quick1 = Clock::now();
-	quickSort(testArr, 0, size - 1);
+	quickSort(testArr, randomNum, size - 1);
 	auto quick2 = Clock::now();
 	std::cout << "Quick Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(quick2 - quick1).count() / 1000000 << " ms" << std::endl;
 	auto counting1 = Clock::now();
