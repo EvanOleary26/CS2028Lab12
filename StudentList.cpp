@@ -29,7 +29,7 @@ void StudentList::displayStudents() const {
         std::cout << "| " << std::left << std::setw(2) << index++ << " | ";
         std::cout << std::left << std::setw(15) << temp->data.getFirstName() << " | ";
         std::cout << std::left << std::setw(15) << temp->data.getLastName() << " | ";
-        std::cout << "M" << temp->data.getMNumber() << " |" << std::endl;
+        std::cout << "m" << temp->data.getMNumber() << " |" << std::endl;
         
         temp = temp->next;
     }
