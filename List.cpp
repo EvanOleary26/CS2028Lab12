@@ -204,6 +204,7 @@ void List<T>::DisplayList() {
 	}        
 }
 */
+
 template <class T>
 void List<T>::Reset() {
     curLocation = nullptr;
@@ -225,4 +226,4 @@ bool List<T>::operator<(const List<T>& right) const {
 }
 
 
-//template class List<Student>;
+template class List<Student>;

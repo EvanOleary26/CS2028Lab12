@@ -1,5 +1,5 @@
-#ifndef __STUDENT__
-#define __STUDENT__
+#ifndef __STUDENT__H
+#define __STUDENT__H
 
 #include <iostream>
 
@@ -10,27 +10,33 @@ class Student {
 		int mNumber;
 		std::string major;
 
+		static bool sortFirstName;
+		static bool sortLastName;
 	public:
 		Student() : firstName(" "), lastName(" "), mNumber(-1), major(" ") {};
 		Student(int mN) : firstName(" "), lastName(" "), mNumber(mN), major(" ") {};
         Student(std::string fN,std::string lN, int mN, std::string mjr) : firstName(fN), lastName(lN), mNumber(mN), major(mjr) {};
 
-		operator int() const { return mNumber; }
+		std::string getFirstName() { return firstName; }
+		std::string getLastName() { return lastName; }
+		int getMNumber() { return mNumber; }
+		std::string getMajor() { return major; }
+
+		void sortByFirstName();
+		void sortByLastName();
+		void sortByMNumber();
 		
-        int operator%(const int &right) { return this->mNumber % right; }
-		int operator/(const int &right) { return this->mNumber / right; }
+		// Operator overloads
+		operator int() const;
+		int operator%(const int &right);
+		int operator/(const int &right);
+		bool operator>(const Student &right);
+		bool operator<(const Student &right);
+		bool operator==(const Student &right);
+		bool operator!=(const Student &right);
 
-        bool operator>(const Student &right) { return this->mNumber > right.mNumber; }
-        bool operator<(const Student &right) { return this->mNumber < right.mNumber; }
-        bool operator==(const Student &right) { return this->mNumber == right.mNumber; }
-		bool operator!=(const Student& right) { return this->mNumber != right.mNumber; }
-
-
-
-		friend std::ostream& operator<<(std::ostream& os, const Student& right) {
-			os << "m" << right.mNumber;
-			return os;
-		}
+		// Friend operator
+		friend std::ostream& operator<<(std::ostream& os, const Student& right);
 };
 
 #endif

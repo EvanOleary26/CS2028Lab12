@@ -3,10 +3,11 @@
 
 #include "Node.h"
 #include "Exceptions.h"
+#include "Student.h"
 
 template <class T>
 class List {
-private:
+protected:
     Node<T>* first;
     Node<T>* last;
     Node<T>* curLocation;

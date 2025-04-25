@@ -1,5 +1,5 @@
-#ifndef __SORTINGALGORITHMS__
-#define __SORTINGALGORITHMS__
+#ifndef __SORTINGALGORITHMS__H
+#define __SORTINGALGORITHMS__H
 
 #include "Student.h"
 #include <iostream>
@@ -7,37 +7,35 @@
 
 //Bubble Sort
 template <class T>
-void bubbleSort(T *arr, int arrSize) {
-
-    std::cout << "\n";
-	for (int i{}; i < arrSize -1;i++){
-		for (int j{}; j < arrSize -i-1;j++){
-			if (arr[j] > arr[j+1]){
-				T temp = arr[j];
-				arr[j] = arr[j+1];
-				arr[j+1] = temp;
-			}
-		}
-        /* Watch sorting process!!
-        for (int k{}; k < arrSize; k++) {
-            std::cout << arr[k] << " ";
+void bubbleSort(T *arr, int arrSize, bool ascending = true) {
+    for (int i{}; i < arrSize - 1; i++) {
+        for (int j{}; j < arrSize - i - 1; j++) {
+            // For descending order, reverse the comparison
+            if ((ascending && arr[j] > arr[j+1]) || 
+                (!ascending && arr[j] < arr[j+1])) {
+                T temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
         }
-        std::cout << "\n";*/
     }
 }
 
 //Insertion Sort
 template <class T>
-void insertionSort(T *arr, int arrSize){
-	for (int i=1; i< arrSize; ++i){
-		T key = arr[i];
-		int j=i-1;
-		while(j>= 0 && arr[j] > key){
-			arr[j+1]=arr[j];
-			j = j-1;
-		}
-		arr[j+1] = key;
-	}
+void insertionSort(T *arr, int arrSize, bool ascending = true) {
+    for (int i = 1; i < arrSize; ++i) {
+        T key = arr[i];
+        int j = i - 1;
+        
+        // Modify comparison for ascending/descending
+        while(j >= 0 && ((ascending && arr[j] > key) || 
+                         (!ascending && arr[j] < key))) {
+            arr[j+1] = arr[j];
+            j = j - 1;
+        }
+        arr[j+1] = key;
+    }
 }
 
 //Merge Sort
@@ -88,37 +86,37 @@ void mergeSort(T arr[], int left, int right) {
     }
 }
 
-
 //Quick Sort
 template <class T>
-int partition(T *arr, int low, int high) {
-	T pivot = arr[high];
-	int i = low - 1;
+int partition(T *arr, int low, int high, bool ascending = true) {
+    T pivot = arr[high];
+    int i = low - 1;
 
-	for (int j = low; j <= high -1; j++) {
-		if (arr[j] < pivot) {
-			i++;
-			T temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
-		}
-	}
+    for (int j = low; j <= high - 1; j++) {
+        // For descending order, reverse the comparison
+        if ((ascending && arr[j] < pivot) || 
+            (!ascending && arr[j] > pivot)) {
+            i++;
+            T temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
 
-	T temp = arr[i + 1];
-	arr[i + 1] = arr[high];
-	arr[high] = temp;
-	return i + 1;
-	
+    T temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
 }
 
 template <class T>
-void quickSort(T *arr, int low, int high) {
-	if (low < high) {
-		int pi = partition(arr, low, high);
+void quickSort(T *arr, int low, int high, bool ascending = true) {
+    if (low < high) {
+        int pi = partition(arr, low, high, ascending);
 
-		quickSort(arr, low, pi - 1);
-		quickSort(arr, pi + 1, high);
-	}
+        quickSort(arr, low, pi - 1, ascending);
+        quickSort(arr, pi + 1, high, ascending);
+    }
 }
 
 //Counting Sort
