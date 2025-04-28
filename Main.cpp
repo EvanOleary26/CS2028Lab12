@@ -2,6 +2,7 @@
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 #include "StudentList.h"
 #include "SortingAlgorithms.h"
@@ -121,7 +122,9 @@ int main() {
             }
         }
     }
+	return 0;
 }
+
 
 Student createRandomStudent() {
     std::string firstNames[] = {"Steve", "Sue", "Mark", "Sarah", "Josh", "Kelly", "Jerry", "Lisa", "Paul", "Rachel"};
@@ -171,42 +174,42 @@ int* runTests(Student *testArr, int size) {
 	auto t1 = Clock::now();
 	bubbleSort(bubbleArr, size);
 	auto t2 = Clock::now();
-    retVals[0] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+    retVals[0] = static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000);
     std::cout << "Bubble Sort completed." << std::endl;
 	//std::cout << "Bubble Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 << " ms" << std::endl;
 	
     t1 = Clock::now();
 	insertionSort(insertArr, size);
 	t2 = Clock::now();
-    retVals[1] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+    retVals[1] = static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000);
     std::cout << "Insertion Sort completed." << std::endl;
 	//std::cout << "Insertion Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 << " ms" << std::endl;
     
     t1 = Clock::now();
     mergeSort(mergeArr, 0, size - 1);
 	t2 = Clock::now();
-    retVals[2] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+    retVals[2] = static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000);
     std::cout << "Merge Sort completed." << std::endl;
 	//std::cout << "Merge Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 << " ms" << std::endl;
 	
     t1 = Clock::now();
 	quickSort(quickArr, 0, size - 1);
 	t2 = Clock::now();
-    retVals[3] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+    retVals[3] = static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000);
     std::cout << "Quick Sort completed." << std::endl;
 	//std::cout << "Quick Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 << " ms" << std::endl;
 
     t1 = Clock::now();
 	countingSort(countArr, size);
 	t2 = Clock::now();
-    retVals[4] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+    retVals[4] = static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000);
     std::cout << "Counting Sort completed." << std::endl;
 	//std::cout << "Counting Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 << " ms" << std::endl;
 
     t1 = Clock::now();
 	radixSort(radixArr, size);
 	t2 = Clock::now();
-    retVals[5] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+    retVals[5] = static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000);
     std::cout << "Radix Sort completed." << std::endl;
 	//std::cout << "Radix Sort: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 << " ms" << std::endl;
 

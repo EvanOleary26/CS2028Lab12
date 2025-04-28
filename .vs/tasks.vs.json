@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-CS2028Lab12",
+      "appliesTo": "/",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "task-CS2028Lab12",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

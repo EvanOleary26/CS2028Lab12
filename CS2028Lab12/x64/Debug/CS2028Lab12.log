@@ -1,0 +1,4 @@
+﻿  Main.cpp
+C:\Users\evanj\source\repos\EvanOleary26\CS2028Lab12\Main.cpp(24,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\evanj\source\repos\EvanOleary26\CS2028Lab12\Main.cpp(237,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  CS2028Lab12.vcxproj -> C:\Users\evanj\source\repos\EvanOleary26\CS2028Lab12\x64\Debug\CS2028Lab12.exe

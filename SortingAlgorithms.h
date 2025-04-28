@@ -8,7 +8,9 @@
 //Bubble Sort
 template <class T>
 void bubbleSort(T *arr, int arrSize, bool ascending = true) {
+    bool swapped;
     for (int i{}; i < arrSize - 1; i++) {
+        swapped = false;
         for (int j{}; j < arrSize - i - 1; j++) {
             // For descending order, reverse the comparison
             if ((ascending && arr[j] > arr[j+1]) || 
@@ -16,8 +18,11 @@ void bubbleSort(T *arr, int arrSize, bool ascending = true) {
                 T temp = arr[j];
                 arr[j] = arr[j+1];
                 arr[j+1] = temp;
+                swapped = true;
             }
         }
+        if (!swapped)
+            break;
     }
 }
 
